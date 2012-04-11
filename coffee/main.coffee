@@ -1,0 +1,6 @@
+require([
+
+], ()->
+  console.log 'main'
+
+)
