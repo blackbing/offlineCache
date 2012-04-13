@@ -7,9 +7,17 @@ require([
 
 ], ()->
   assert = buster.assert
+
   buster.testCase "Date strftime tests",
     setUp: ->
-      @date = new Date(2009, 11, 5)
+      #create PhotoPicker
+
+    "photoPicker":
+
+      "thumbnailData": ->
+        assert.equals true, true
+
+    ###
 
     "%Y":
       setUp: ->
@@ -33,5 +41,6 @@ require([
     "//%j should return the day of the year": ->
       date = new Date(2011, 0, 1)
       assert.equals date.strftime("%j"), 1
+    ###
 
 )
