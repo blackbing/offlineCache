@@ -1,7 +1,7 @@
 {
   "baseUrl":'javascript',
   name: "offlineCache/handlebar.offlineCache",
-  out: 'javascript/handlebar.offlineCache-min.js',
+  out: 'javascript/offlineCache/handlebar.offlineCache-min.js',
   paths: {
   }
 }

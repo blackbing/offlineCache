@@ -3,5 +3,6 @@ define [
 ], (offlineCache)->
 
   Handlebars.registerHelper('offlineCache', (src)->
-    src = offlineCache.getURL(src)
+    src = offlineCache.getURL(src, filetype:'image')
+    src
   )

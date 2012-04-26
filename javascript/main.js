@@ -1,6 +1,6 @@
 (function() {
 
-  require(['offlineCache/imageData', 'text!../templates/offlineCache.hbs', 'offlineCache/handlebar.offlineCache', 'offlineCache/jquery.offlineCache'], function(imageData, offlineCacheTpl) {
+  require(['offlineCache/imageData', 'text!../templates/offlineCache.hbs', 'offlineCache/handlebar.offlineCache-min', 'offlineCache/jquery.offlineCache-min'], function(imageData, offlineCacheTpl) {
     /*
       html = []
       _.each(imageData, (val)->

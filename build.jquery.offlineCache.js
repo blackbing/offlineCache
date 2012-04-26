@@ -1,7 +1,7 @@
 {
   "baseUrl":'javascript',
   name: "offlineCache/jquery.offlineCache",
-  out: 'javascript/jquery.offlineCache-min.js',
+  out: 'javascript/offlineCache/jquery.offlineCache-min.js',
   paths: {
   }
 }
