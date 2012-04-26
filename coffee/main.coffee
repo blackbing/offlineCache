@@ -26,12 +26,14 @@ require([
 
   url = 'data/ajax.json'
   ajaxJsonURL = $.offlineCache.getURL('data/ajax.json')
+  #ajaxJsonURL = $.offlineCache.getURL('data/ajax.json', disableCache:true)
   $.get(ajaxJsonURL, (res)->
     #save content manually
     if url is ajaxJsonURL
       $.offlineCache.create(url,
         content:res
         filetype: 'text'
+        #disableCache: true
       )
 
     console.log 'ajax call', res

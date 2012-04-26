@@ -94,7 +94,7 @@ define([
 
 
       create: (src, opts)->
-        if not fsLib.enabled
+        if not fsLib.enabled or opts.disableCache
           return
 
         opts = $.extend(opts, src:src)
@@ -103,7 +103,8 @@ define([
           _process()
 
       getURL: (src, opts=filetype:'txt')->
-        if not fsLib.enabled
+        console.log opts
+        if not fsLib.enabled or opts.disableCache
           return src
         srcKey = faultylabs.MD5(src)
         url = fsLib.get(srcKey)

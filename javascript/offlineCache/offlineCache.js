@@ -90,7 +90,7 @@
       }
 
       offlineCache.prototype.create = function(src, opts) {
-        if (!fsLib.enabled) return;
+        if (!fsLib.enabled || opts.disableCache) return;
         opts = $.extend(opts, {
           src: src
         });
@@ -105,7 +105,8 @@
             filetype: 'txt'
           };
         }
-        if (!fsLib.enabled) return src;
+        console.log(opts);
+        if (!fsLib.enabled || opts.disableCache) return src;
         srcKey = faultylabs.MD5(src);
         url = fsLib.get(srcKey);
         if (url) {
