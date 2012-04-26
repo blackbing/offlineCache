@@ -3,6 +3,12 @@ require([
   'offlineCache/imageData'
 ], (offlineCache, imageData)->
 
+  #jQuery plugin
+  $.extend($, offlineCache:offlineCache)
+
+
+
+
   console.log 'main'
   console.log offlineCache
 
