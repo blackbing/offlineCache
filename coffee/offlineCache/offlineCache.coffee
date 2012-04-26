@@ -20,23 +20,23 @@ define([
       bb.append ab
       bb.getBlob mimeString
 
-    canvas = document.createElement('canvas')
-    offlineCache =
-      _delayTime: 200
-      _processQueue: []
-      _process: ->
-        if @_processQueue.length is 0
+    class offlineCache
+      canvas = document.createElement('canvas')
+      _delayTime = 200
+      _processQueue = []
+      _process = ()->
+        if _processQueue.length is 0
           return
 
-        currentProcess = @_processQueue[0]
+        currentProcess = _processQueue[0]
 
         switch currentProcess.filetype
           when 'image'
-            @_processImage(currentProcess.src)
+            _processImage(currentProcess.src)
           else
-            @_processText(currentProcess)
+            _processText(currentProcess)
 
-      _processText: (opts)->
+      _processText = (opts)->
         content = opts?.content
         if content
           console.log('creating...', opts.src)
@@ -46,12 +46,12 @@ define([
 
           fsLib.set(srcKey, bb.getBlob('text/plain'))
 
-        @_processQueue.splice(0, 1)
+        _processQueue.splice(0, 1)
         #process next
-        @_process.apply(@)
+        _process.apply(@)
 
 
-      _processImage: (src)->
+      _processImage = (src)->
         me = @
         $('<img>').load(->
           img = @
@@ -69,31 +69,35 @@ define([
           blob = dataURItoBlob(dataURL)
           fsLib.set(srcKey, blob)
           #clear
-          me._processQueue.splice(0, 1)
+          _processQueue.splice(0, 1)
           #process next
           _.delay( =>
-            me._process.apply(me)
-          , me._delayTime)
+            _process.apply(me)
+          , _delayTime)
         )
         .error(->
           img = @
           console.log 'load error', img.src
           src = $(img).data('src')
           me.delete(src)
-          me._processQueue.splice(0, 1)
+          _processQueue.splice(0, 1)
           #process next
-          me._process.apply(me)
+          _process.apply(me)
         )
         .data('src', src)
         .attr('src', src)
 
 
+      constructor: ->
+        console.log('constructor')
+
+
       create: (src, opts)->
 
         opts = $.extend(opts, src:src)
-        @_processQueue.push(opts)
-        if @_processQueue.length is 1
-          @_process()
+        _processQueue.push(opts)
+        if _processQueue.length is 1
+          _process()
 
       getURL: (src, opts=filetype:'txt')->
         srcKey = faultylabs.MD5(src)
@@ -101,7 +105,7 @@ define([
         if(url)
           url
         else
-          offlineCache.create(src, opts)
+          @create(src, opts)
           src
 
     ###
@@ -118,5 +122,5 @@ define([
     ###
 
     #exports
-    offlineCache
+    new offlineCache
 )

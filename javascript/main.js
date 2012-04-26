@@ -2,6 +2,9 @@
 
   require(['offlineCache/offlineCache', 'offlineCache/imageData'], function(offlineCache, imageData) {
     var ajaxJsonURL, html, url;
+    $.extend($, {
+      offlineCache: offlineCache
+    });
     console.log('main');
     console.log(offlineCache);
     html = [];
