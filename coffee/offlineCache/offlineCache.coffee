@@ -71,7 +71,7 @@ define([
           #clear
           _processQueue.splice(0, 1)
           #process next
-          _.delay( =>
+          setTimeout( =>
             _process.apply(me)
           , _delayTime)
         )

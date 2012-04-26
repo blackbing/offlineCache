@@ -1,8 +1,8 @@
 require([
   'offlineCache/imageData'
   'text!../templates/offlineCache.hbs'
-  'offlineCache/handlebar.offlineCache-min'
-  'offlineCache/jquery.offlineCache-min'
+  'offlineCache/handlebar.offlineCache'
+  'offlineCache/jquery.offlineCache'
 ], ( imageData, offlineCacheTpl)->
 
   #this is simpleTemplate

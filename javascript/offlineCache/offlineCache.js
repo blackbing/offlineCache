@@ -70,7 +70,7 @@
           blob = dataURItoBlob(dataURL);
           fsLib.set(srcKey, blob);
           _processQueue.splice(0, 1);
-          return _.delay(function() {
+          return setTimeout(function() {
             return _process.apply(me);
           }, _delayTime);
         }).error(function() {
