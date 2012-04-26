@@ -1,27 +1,27 @@
 (function() {
 
-  require(['offlineCache/offlineCache', 'offlineCache/imageData'], function(offlineCache, imageData) {
-    var ajaxJsonURL, html, url;
-    $.extend($, {
-      offlineCache: offlineCache
+  require(['offlineCache/imageData', 'text!../templates/offlineCache.hbs', 'offlineCache/handlebar.offlineCache', 'offlineCache/jquery.offlineCache'], function(imageData, offlineCacheTpl) {
+    /*
+      html = []
+      _.each(imageData, (val)->
+        src = $.offlineCache.getURL(val, filetype:'image')
+        console.log src
+        html.push("<img src='#{src}'>")
+      )
+    
+      $('body').append(html.join(''))
+    */
+    var ajaxJsonURL, html, template, url;
+    template = Handlebars.compile(offlineCacheTpl);
+    html = template({
+      images: imageData
     });
-    console.log('main');
-    console.log(offlineCache);
-    html = [];
-    _.each(imageData, function(val) {
-      var src;
-      src = offlineCache.getURL(val, {
-        filetype: 'image'
-      });
-      console.log(src);
-      return html.push("<img src='" + src + "'>");
-    });
-    $('body').append(html.join(''));
+    $('body').append(html);
     url = 'data/ajax.json';
-    ajaxJsonURL = offlineCache.getURL('data/ajax.json');
+    ajaxJsonURL = $.offlineCache.getURL('data/ajax.json');
     return $.get(ajaxJsonURL, function(res) {
       if (url === ajaxJsonURL) {
-        offlineCache.create(url, {
+        $.offlineCache.create(url, {
           content: res,
           filetype: 'text'
         });

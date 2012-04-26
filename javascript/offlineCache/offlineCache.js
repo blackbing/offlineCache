@@ -20,7 +20,7 @@
     offlineCache = (function() {
       var canvas, _delayTime, _process, _processImage, _processQueue, _processText;
 
-      canvas = document.createElement('canvas');
+      canvas = null;
 
       _delayTime = 200;
 
@@ -85,10 +85,12 @@
       };
 
       function offlineCache() {
+        canvas = document.createElement('canvas');
         console.log('constructor');
       }
 
       offlineCache.prototype.create = function(src, opts) {
+        if (!fsLib.enabled) return;
         opts = $.extend(opts, {
           src: src
         });
@@ -103,6 +105,7 @@
             filetype: 'txt'
           };
         }
+        if (!fsLib.enabled) return src;
         srcKey = faultylabs.MD5(src);
         url = fsLib.get(srcKey);
         if (url) {

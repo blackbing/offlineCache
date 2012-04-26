@@ -18,7 +18,10 @@ define([
         )
         fsDeferred: $.Deferred()
 
+      enabled: _pr.localStorageEnable
       constructor: ->
+        if not @enabled
+          return
         me = @
         onInitFs = (fs)=>
           ###
@@ -59,6 +62,8 @@ define([
 
 
       set: (key, value)->
+        if not @enabled
+          return
         #value.replace('data:image/png;base64,','')
         _pr.fsDeferred.done((fs)=>
           localStorage[key] = true
@@ -79,18 +84,24 @@ define([
         )
 
       get: (key)->
+        if not @enabled
+          return null
         rootURL = _pr.fsRoot
         if rootURL and localStorage[key]?
           "#{rootURL}/#{key}"
         else
           null
 
-      delete: (key)->
+      remove: (key)->
+        if not @enabled
+          return null
         console.log 'delete', key
         delete localStorage[key]
         #TODO: try to delete file
 
       deleteAll: ->
+        if not @enabled
+          return null
         console.log 'deleteAll'
         localStorage.clear()
         #TODO

@@ -21,7 +21,7 @@ define([
       bb.getBlob mimeString
 
     class offlineCache
-      canvas = document.createElement('canvas')
+      canvas = null #document.createElement('canvas')
       _delayTime = 200
       _processQueue = []
       _process = ()->
@@ -89,10 +89,13 @@ define([
 
 
       constructor: ->
+        canvas = document.createElement('canvas')
         console.log('constructor')
 
 
       create: (src, opts)->
+        if not fsLib.enabled
+          return
 
         opts = $.extend(opts, src:src)
         _processQueue.push(opts)
@@ -100,6 +103,8 @@ define([
           _process()
 
       getURL: (src, opts=filetype:'txt')->
+        if not fsLib.enabled
+          return src
         srcKey = faultylabs.MD5(src)
         url = fsLib.get(srcKey)
         if(url)

@@ -17,9 +17,12 @@
         fsDeferred: $.Deferred()
       };
 
+      fsLib.prototype.enabled = _pr.localStorageEnable;
+
       function fsLib() {
         var me, onInitFs,
           _this = this;
+        if (!this.enabled) return;
         me = this;
         onInitFs = function(fs) {
           /*
@@ -60,6 +63,7 @@
 
       fsLib.prototype.set = function(key, value) {
         var _this = this;
+        if (!this.enabled) return;
         return _pr.fsDeferred.done(function(fs) {
           localStorage[key] = true;
           return fs.root.getFile("" + key, {
@@ -80,6 +84,7 @@
 
       fsLib.prototype.get = function(key) {
         var rootURL;
+        if (!this.enabled) return null;
         rootURL = _pr.fsRoot;
         if (rootURL && (localStorage[key] != null)) {
           return "" + rootURL + "/" + key;
@@ -88,12 +93,14 @@
         }
       };
 
-      fsLib.prototype["delete"] = function(key) {
+      fsLib.prototype.remove = function(key) {
+        if (!this.enabled) return null;
         console.log('delete', key);
         return delete localStorage[key];
       };
 
       fsLib.prototype.deleteAll = function() {
+        if (!this.enabled) return null;
         console.log('deleteAll');
         return localStorage.clear();
       };
