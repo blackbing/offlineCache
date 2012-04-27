@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Offlinecache : create offline cache HTML5 FileAPI" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Offlinecache</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/blackbing/offlineCache">Fork Me on GitHub</a>
+
+          <h1 id="project_title">Offlinecache</h1>
+          <h2 id="project_tagline">create offline cache HTML5 FileAPI</h2>
+
+          <section id="downloads">
+            <a class="zip_download_link" href="https://github.com/blackbing/offlineCache/zipball/master">Download this project as a .zip file</a>
+            <a class="tar_download_link" href="https://github.com/blackbing/offlineCache/tarball/master">Download this project as a tar.gz file</a>
+          </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h2>Background</h2>
+
+<p>The modern browser imprements cache assets very well. But sometimes we need to get images with proxy or generate photos from server. So I try to cache images in local to avoid request server again and again.
+It cached in local file system, so the request won't send again if it found the local cache.</p>
+
+<h2>So, what is it?</h2>
+
+<ul>
+<li>Offline cache image, especially large image from proxy server.</li>
+<li>Offline cache AJAX data, provide user to get ajax data. Speed up the query time and reduce server query</li>
+<li>Development mode. In frontend development, we don't want to spend time in server request. so we can cache it in local in development mode.</li>
+</ul><h2>Demo</h2>
+
+<p><a href="http://blackbing.github.com/offlineCache/demo.html">http://blackbing.github.com/offlineCache/demo.html</a></p>
+
+<h2>Usage</h2>
+
+<h3>as a jQuery plugin:</h3>
+
+<p>Just require <a href="https://github.com/blackbing/offlineCache/blob/master/javascript/jquery.offlineCache-min.js">jquery.offlineCache-min.js</a> and</p>
+
+<pre><code>//cache AJAX response
+url = 'data/ajax.json'
+//if cache is found, it will return a localfile url
+ajaxJsonURL = $.offlineCache.getURL('data/ajax.json')
+$.get(ajaxJsonURL, (res)-&gt;
+  #save content manually
+  if url is ajaxJsonURL
+    $.offlineCache.create(url,
+      content:res
+      filetype: 'text'
+  )
+)
+</code></pre>
+
+<h3>as a Handlebar Helper:</h3>
+
+<p>Just require <a href="https://github.com/blackbing/offlineCache/blob/master/javascript/handlebar.offlineCache-min.js">handlebar.offlineCache-min.js</a> and</p>
+
+<h4>Template Example <a href="https://github.com/blackbing/offlineCache/blob/master/templates/offlineCache.hbs">(offlineCache.hbs)</a>
+</h4>
+
+<pre><code>{{#each images}}
+  &lt;img src="{{offlineCache this}}" &gt;
+{{/each}}
+
+
+#Coffeescript
+Coffeescript
+template = Handlebars.compile(offlineCacheTpl)
+html = template(images:imageData)
+</code></pre>
+
+<h3>For more example: please see <a href="https://github.com/blackbing/offlineCache/blob/master/coffee/main.coffee">main.coffee</a>
+</h3>
+
+<h2>Limitation</h2>
+
+<ul>
+<li>Chrome only. It use HTML5 File API. The most frustrated thing is it only supported for Chrome. </li>
+</ul><h3>Dependency</h3>
+
+<ul>
+<li>
+<a href="https://github.com/jquery/jquery">jQuery</a><br>
+</li>
+<li><a href="http://blog.faultylabs.com/?d=md5">faultylab.MD5</a></li>
+<li><a href="http://requirejs.org">RequireJS</a></li>
+</ul><h2>Contribute</h2>
+
+<h3>Compile CoffeeScript</h3>
+
+<pre><code>./compileScript.sh
+</code></pre>
+
+<h3>Run Server</h3>
+
+<p>It need to run on server, you can simply use:</p>
+
+<pre><code>./runSimpleServer.sh
+</code></pre>
+
+<p>and open</p>
+
+<pre><code>http://localhost:8888
+</code></pre>
+
+<h3>Build</h3>
+
+<p>Based on <a href="http://requirejs.org/docs/optimization.html">require/r.js</a></p>
+
+<pre><code>./build.sh
+</code></pre>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Offlinecache maintained by <a href="https://github.com/blackbing">blackbing</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
