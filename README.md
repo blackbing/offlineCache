@@ -7,6 +7,9 @@ It cached in local file system, so the request won't send again if it found the 
 * Offline cache AJAX data, provide user to get ajax data. Speed up the query time and reduce server query
 * Development mode. In frontend development, we don't want to spend time in server request. so we can cache it in local in development mode.
 
+##Demo
+[http://blackbing.github.com/offlineCache/demo.html](http://blackbing.github.com/offlineCache/demo.html)
+
 ##Usage
 ###as a jQuery plugin: 
 Just require [jquery.offlineCache-min.js](https://github.com/blackbing/offlineCache/blob/master/javascript/jquery.offlineCache-min.js) and
