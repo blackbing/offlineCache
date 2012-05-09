@@ -34,6 +34,7 @@ define([
           if not _pr.fsRoot
             localStorage.fsRoot = fs.root.toURL()
           _pr.fsDeferred.resolve(fs)
+          console.log 'initfs', 'resolve'
 
         window.requestFileSystem(
           window.TEMPORARY,

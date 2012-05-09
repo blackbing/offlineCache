@@ -31,7 +31,8 @@
                     )
           */          _pr.fs = fs;
           if (!_pr.fsRoot) localStorage.fsRoot = fs.root.toURL();
-          return _pr.fsDeferred.resolve(fs);
+          _pr.fsDeferred.resolve(fs);
+          return console.log('initfs', 'resolve');
         };
         window.requestFileSystem(window.TEMPORARY, _pr.fileSize, onInitFs, this.errorHandler);
       }

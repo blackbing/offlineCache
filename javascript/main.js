@@ -23,7 +23,7 @@
       if (url === ajaxJsonURL) {
         $.offlineCache.create(url, {
           content: res,
-          filetype: 'text'
+          filetype: 'txt'
         });
       }
       return console.log('ajax call', res);

@@ -32,7 +32,7 @@ require([
     if url is ajaxJsonURL
       $.offlineCache.create(url,
         content:res
-        filetype: 'text'
+        filetype: 'txt'
         #disableCache: true
       )
 
