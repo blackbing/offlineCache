@@ -16,9 +16,7 @@ define([
       while i < byteString.length
         ia[i] = byteString.charCodeAt(i)
         i++
-      bb = new window.BlobBuilder()
-      bb.append ab
-      bb.getBlob mimeString
+      bb = new window.Blob([ab], {type: mimeString})
 
     class offlineCache
       canvas = null #document.createElement('canvas')
@@ -41,10 +39,9 @@ define([
         if content
           console.log('creating...', opts.src)
           srcKey = faultylabs.MD5(opts.src)
-          bb = new window.BlobBuilder()
-          bb.append(content)
+          bb = new window.Blob([content], {type: 'text/plain'})
 
-          fsLib.set(srcKey, bb.getBlob('text/plain'))
+          fsLib.set(srcKey, bb)
 
         _processQueue.splice(0, 1)
         #process next
