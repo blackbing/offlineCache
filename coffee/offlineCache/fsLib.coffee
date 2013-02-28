@@ -34,7 +34,7 @@ define([
           if not _pr.fsRoot
             localStorage.fsRoot = fs.root.toURL()
           _pr.fsDeferred.resolve(fs)
-          console.log 'initfs', 'resolve'
+          console.log 'initfs', 'resolve', _pr.fsDeferred.state()
 
         window.requestFileSystem(
           window.TEMPORARY,
@@ -89,7 +89,7 @@ define([
           return null
         rootURL = _pr.fsRoot
         if rootURL and localStorage[key]?
-          "#{rootURL}/#{key}"
+          "#{rootURL}#{key}"
         else
           null
 
